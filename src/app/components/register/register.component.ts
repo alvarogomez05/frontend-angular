@@ -31,10 +31,11 @@ export class RegisterComponent {
 
       this.clientesService.postClientes(cliente).subscribe(
         (respuesta) => {
-          console.log('POST exitoso:', respuesta);
+          // console.log('POST exitoso:', respuesta);
+          this.Login()
         },
         (error) => {
-          console.error('Error en el POST:', error);
+          // console.error('Error en el POST:', error);
         }
       );
     

@@ -33,7 +33,7 @@ export class LoginComponent {
     )
 
     this.clientes.forEach(cliente => {
-      if(cliente.email == email && cliente.password == pwd){
+      if(cliente.email == email){
         console.log('Las credenciales coinciden');
         this.guardarLocalStorageClient(cliente);
         this.RedirectCliente()
