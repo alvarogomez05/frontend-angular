@@ -1,0 +1,17 @@
+.grayscale {
+  filter: grayscale(100%);
+  pointer-events: none;  /* Para evitar interacciones cuando está deshabilitado */
+}
+
+.dark-theme {
+  background-color: white;
+}
+
+.light-theme {
+  color: #dee2e6;
+}
+
+
+//
+
+

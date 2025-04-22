@@ -1,0 +1,14 @@
+{
+    "empleado": {
+        "id": "1",
+        "dni": "02326951H",
+        "nombre": "Alvaro",
+        "apellido1": "Gómez",
+        "apellido2": "Cedenilla",
+        "cargo": "empleado",
+        "email": "alvatox11@gmail.com",
+        "password": "Abcdef1!",
+        "telefono": "67272541",
+        "salario": "5000"
+    }
+}

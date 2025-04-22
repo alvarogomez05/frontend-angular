@@ -1,0 +1,146 @@
+<section class="d-flex">
+
+  <!-- Logo / Imagen -->
+  <div class="col-md-4 col-lg-6 d-flex align-items-center justify-content-center mb-4 mb-md-0 d-none d-md-flex">
+    <aside>
+      <img src="./assets/images/logo-provisional.png" class="img-fluid " alt="Logo" style="max-height: 200px;">
+    </aside>
+  </div>
+
+  <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center fondo-azul">
+
+    <!-- Formulario -->
+    <div class=" w-100 h p-5 d-flex align-content-center justify-content-center ">
+      <section id="clientesForm" class="d-flex flex-column align-content-center justify-content-center bg-white w-75 p-5 rounded shadow">
+        <h3 class="text-center  mb-4 text-azul">Registrarse</h3>
+        <form  #formCliente="ngForm"(ngSubmit)="onSubmit(formCliente)" >
+<!--     COMPLETAR LOS CAMPOS QUE NOS FALTAN PARA REGISTRAR A UN USUARIO     -->
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              name="name"
+              placeholder="Nombre"
+              required
+              ngModel
+              #nombreModel="ngModel"
+            />
+            <mat-error *ngIf="nombreModel.invalid"
+            >El nombre es obligatorio</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Apellido 1</mat-label>
+            <input
+              matInput
+              name="ape1"
+              placeholder="Apellido 2"
+              required
+              min=3
+              max=50
+              ngModel
+              #ape1Model="ngModel"
+            />
+            <mat-error *ngIf="ape1Model.invalid"
+            >El apellido es obligatorio</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Apellido 2</mat-label>
+            <input
+              matInput
+              name="ape2"
+              min=3
+              max=50
+              placeholder="Apellido 2"
+              required
+              ngModel
+              #ape2Model="ngModel"
+            />
+            <mat-error *ngIf="ape2Model.invalid"
+            >El apellido es obligatorio</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Correo</mat-label>
+            <input
+              matInput
+              name="mail"
+              placeholder="Correo"
+              required
+              type="email"
+              ngModel
+              #mailModel="ngModel"
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            />
+            <mat-error *ngIf="mailModel.value==''"
+            >El correo es obligatorio</mat-error
+            >
+            <mat-error *ngIf="mailModel.value !== '' && mailModel.invalid">
+              El correo no cumple el formato
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Teléfono</mat-label>
+            <input
+              matInput
+              name="tlf"
+              placeholder="telèfono"
+              required
+              ngModel
+              #tlfModel="ngModel"
+              pattern="[0-9]{9}"
+            />
+            <mat-error *ngIf="tlfModel.value == ''"
+            >El teléfono es obligatorio</mat-error
+            >
+            <mat-error *ngIf="tlfModel.value !=='' && tlfModel.invalid">
+              El telefono no cumple el formato
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Dirección</mat-label>
+            <input
+              matInput
+              name="dir"
+              placeholder="Direccion"
+              required
+              ngModel
+              #dirModel="ngModel"
+            />
+            <mat-error *ngIf="dirModel.invalid"
+            >La dirección es obligatorio</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              type="password"
+              name="contraseña"
+              placeholder="Contraseña"
+              required
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,100}$"
+              ngModel
+              #contraseniaModel="ngModel"
+            />
+            <mat-error *ngIf="contraseniaModel.value == ''">
+              La contraseña es obligatoria</mat-error
+            >
+            <mat-error *ngIf="contraseniaModel.value !== '' && contraseniaModel.invalid">
+              minimo 8 caracteres, mayusculas, minusculas, numeros y caracter especial
+            </mat-error>
+          </mat-form-field>
+          <button class="col-12" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
+                  [disabled]=" nombreModel.invalid || contraseniaModel.invalid || ape1Model.invalid || ape2Model.invalid ||mailModel.invalid || tlfModel.invalid || dirModel.invalid"
+                  [ngClass]="{'grayscale': nombreModel.invalid || contraseniaModel.invalid || ape1Model.invalid || ape2Model.invalid ||mailModel.invalid || tlfModel.invalid || dirModel.invalid}"
+          >Registrarse</button>
+        </form>
+        <button class="col-12 mt-4" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
+                (click)="Login()">¿Ya tienes cuenta?</button>
+
+      </section>
+    </div>
+  </div>
+
+</section>

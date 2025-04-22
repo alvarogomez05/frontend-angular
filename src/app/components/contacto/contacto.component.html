@@ -1,0 +1,77 @@
+<div class=" w-100 h p-5 d-flex align-content-center justify-content-center ">
+  <section id="clientesForm" class="d-flex flex-column align-content-center justify-content-center bg-white w-75 p-5 rounded shadow ">
+    <h3 class="text-center  mb-4 text-azul " >Contacta con nosotros</h3>
+    <form  #formCliente="ngForm" (ngSubmit)="onSubmit($event)" class="" >
+      <!--     COMPLETAR LOS CAMPOS QUE NOS FALTAN PARA REGISTRAR A UN USUARIO     -->
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Nombre</mat-label>
+        <input
+          matInput
+          name="name"
+          placeholder="Nombre"
+          required
+          ngModel
+          #nombreModel="ngModel"
+        />
+        <mat-error *ngIf="nombreModel.invalid"
+        >El nombre es obligatorio</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Correo</mat-label>
+        <input
+          matInput
+          name="mail"
+          placeholder="Correo"
+          required
+          type="email"
+          ngModel
+          #mailModel="ngModel"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        />
+        <mat-error *ngIf="mailModel.value==''"
+        >El correo es obligatorio</mat-error
+        >
+        <mat-error *ngIf="mailModel.value !== '' && mailModel.invalid">
+          El correo no cumple el formato
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Asunto</mat-label>
+        <input
+          matInput
+          name="asunto"
+          placeholder="Asunto"
+          required
+          ngModel
+          #asuntoModel="ngModel"
+        />
+        <mat-error *ngIf="nombreModel.invalid"
+        >El asunto es obligatorio</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-12 ">
+        <mat-label>Mensaje</mat-label>
+        <textarea
+          matInput
+          name="msj"
+          placeholder="Mensaje"
+          required
+          ngModel
+          #msjModel="ngModel"
+        >
+        </textarea>
+        <mat-error *ngIf="msjModel.invalid"
+        >El mensaje es obligatorio</mat-error
+        >
+      </mat-form-field>
+
+      <button class="col-sm-5 col-12 shadow" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
+              [disabled]=" nombreModel.invalid || mailModel.invalid || msjModel.invalid || asuntoModel.invalid"
+              [ngClass]="{'grayscale': nombreModel.invalid ||mailModel.invalid || msjModel.invalid || asuntoModel.invalid}"
+      >Enviar <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+
+
+  </section>
+</div>

@@ -1,0 +1,139 @@
+<section class="d-flex">
+
+  <!-- Logo / Imagen -->
+  <div class="col-md-4 col-lg-6 d-flex align-items-center justify-content-center mb-4 mb-md-0 d-none d-md-flex">
+    <aside>
+      <img src="./assets/images/logo-provisional.png" class="img-fluid " alt="Logo" style="max-height: 200px;">
+    </aside>
+  </div>
+
+  <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center fondo-azul">
+
+      <!-- Formulario -->
+      <div class=" w-100 h p-5 d-flex align-content-center justify-content-center ">
+        <section id="empleadosForm" class="d-flex flex-column align-content-center justify-content-center bg-white w-75 p-5 rounded shadow d-none">
+          <h3 class="text-center  mb-4 text-azul">Iniciar Sesión</h3>
+          <form  #formEmpleado="ngForm" (ngSubmit)="onSubmitEmployee()" >
+            <mat-form-field appearance="outline" class="col-12">
+              <mat-label>DNI</mat-label>
+              <input
+                matInput
+                name="dni"
+                placeholder="DNI"
+                required
+                ngModel
+                pattern="^[0-9]{8}[A-Z]$"
+                #dniModel="ngModel"
+              />
+              <mat-error *ngIf="dniModel.value == ''"
+              >El dni es obligatorio</mat-error
+              >
+              <mat-error *ngIf="dniModel.value !=='' && dniModel.invalid">El dni no cumple el formato</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-12">
+              <mat-label>Correo</mat-label>
+              <input
+                matInput
+                name="mail"
+                placeholder="Correo"
+                required
+                type="email"
+                ngModel
+                #mailModel="ngModel"
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              />
+              <mat-error *ngIf="mailModel.value==''"
+              >El correo es obligatorio</mat-error
+              >
+              <mat-error *ngIf="mailModel.value !== '' && mailModel.invalid">
+                El correo no cumple el formato
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-12">
+              <mat-label>Contraseña</mat-label>
+              <input
+                matInput
+                type="password"
+                name="contraseña"
+                placeholder="Contraseña"
+                required
+                ngModel
+                #contraseniaModel="ngModel"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,100}$"
+              />
+              <mat-error *ngIf="contraseniaModel.value == ''">
+                La contraseña es obligatoria</mat-error
+              >
+              <mat-error *ngIf="contraseniaModel.value !== '' && contraseniaModel.invalid">
+                minimo 8 caracteres, mayusculas, minusculas, numeros y caracter especial
+              </mat-error>
+            </mat-form-field>
+            <button class="col-12" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
+                    [disabled]="dniModel.invalid || mailModel.invalid || contraseniaModel.invalid"
+                    [ngClass]="{'grayscale': dniModel.invalid || mailModel.invalid || contraseniaModel.invalid}"
+                    >Iniciar sesión</button>
+          </form>
+          <div class="w-100 text-end mt-4">
+            <span (click)="showClients()" class="text-azul">Cliente</span>
+          </div>
+        </section>
+
+        <section id="clientesForm" class="d-flex flex-column align-content-center justify-content-center bg-white w-75 p-5 rounded shadow">
+          <h3 class="text-center  mb-4 text-azul">Iniciar Sesión</h3>
+          <form  #formCliente="ngForm" (ngSubmit)="onSubmitClient(mailModel2.value,contraseniaModel2.value)" >
+            <mat-form-field appearance="outline" class="col-12">
+              <mat-label>Correo</mat-label>
+              <input
+                matInput
+                name="mail"
+                placeholder="Correo"
+                required
+                type="email"
+                ngModel
+                #mailModel2="ngModel"
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              />
+              <mat-error *ngIf="mailModel2.value==''"
+              >El correo es obligatorio</mat-error
+              >
+              <mat-error *ngIf="mailModel2.value !== '' && mailModel2.invalid">
+                El correo no cumple el formato
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-12">
+              <mat-label>Contraseña</mat-label>
+              <input
+                matInput
+                type="password"
+                name="contraseña"
+                placeholder="Contraseña"
+                required
+                ngModel
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,100}$"
+                #contraseniaModel2="ngModel"
+              />
+              <mat-error *ngIf="contraseniaModel2.value == ''">
+              La contraseña es obligatoria</mat-error
+              >
+              <mat-error *ngIf="contraseniaModel2.value !== '' && contraseniaModel2.invalid">
+                minimo 8 caracteres, mayusculas, minusculas, numeros y caracter especial
+              </mat-error>
+            </mat-form-field>
+            <button class="col-12" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
+                    [disabled]=" mailModel2.invalid || contraseniaModel2.invalid"
+                    [ngClass]="{'grayscale': mailModel2.invalid || contraseniaModel2.invalid}"
+            >Iniciar sesión</button>
+          </form>
+          <button class="col-12 mt-4" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
+           (click)="Register()">Registrarse</button>
+          <div class="w-100 text-end mt-4">
+            <span (click)="showEmployees()" class="text-azul">Empleado</span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+</section>

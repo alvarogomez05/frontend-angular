@@ -1,0 +1,14 @@
+
+.fondo-azul{
+  background-color: #55C0FD;
+}
+
+
+.text-azul{
+  color: #55C0FD;
+}
+
+.grayscale {
+  filter: grayscale(100%);
+  pointer-events: none;  /* Para evitar interacciones cuando está deshabilitado */
+}

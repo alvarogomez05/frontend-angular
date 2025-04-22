@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg bg-body-white p-3 mb-5 border-bottom " >
+  <a class="navbar-brand" routerLink="./home"><img src="assets/images/logo-provisional.png" class="logotype"></a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasNavbarLabel" routerLink="./home"><img src="assets/images/logo-provisional.png"  class="logotype"></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body ">
+      <ul class="navbar-nav justify-content-end  text-center flex-grow-1 pe-3 align-baseline">
+        <li class="nav-item ">
+          <a class="nav-link" routerLinkActive="active" routerLink="./home">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " routerLinkActive="active" routerLink="./productos">Productos</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" routerLinkActive="active" routerLink="./favoritos">Favoritos</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link custom-badge" routerLinkActive="active" routerLink="./carrito" matBadgeSize="small" matBadgeOverlap="true" matBadge="{{carritoItems}}" >Carrito</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" routerLinkActive="active" routerLink="./contacto">Contacto</a>
+        </li>
+        <li class="nav-item  position-relative">
+          <button class="nav-link" mat-button (click)="showChangePassword()"><span [ngClass]="themeClass" >Perfil</span> <i class="fa-solid fa-user icon"></i></button>
+          <div class=" shadow rounded d-none" id="menu" [ngClass]="menu">
+            <p class="" mat-menu-item (click)="changePassword()">Cambiar contraseña</p>
+            <button class="btn rounded-fill" id="btnTheme" (click)="ChangeTheme()"><i id="moon" class="fa-solid fa-moon"></i>
+              <i id="sun" class="fa-solid fa-sun d-none"></i></button>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+

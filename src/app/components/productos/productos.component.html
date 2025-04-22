@@ -1,0 +1,8 @@
+<div *ngIf="loading === true" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+
+<div *ngIf="loading === false" class="d-flex gap-1 gap-sm-3 gap-md-5 flex-wrap flex-row w-100 justify-content-center p-5 ">
+  <app-productos-card *ngFor="let producto of productos" [producto]="producto"  class="shadow rounded"></app-productos-card>
+</div>

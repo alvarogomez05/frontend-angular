@@ -1,0 +1,17 @@
+<mat-card class=" card d-flex flex-column justify-content-between" [ngClass]="themeClass">
+  <img mat-card-image src="{{img}}" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p class="text-start fw-semibold">{{producto.nombre}}</p>
+    <p class="text-start">
+      {{
+        producto.descripcion
+      }}
+    </p>
+    <p class="text-end">{{producto.precio}}</p>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button><i class="fa-solid fa-heart text-danger"></i></button>
+    <button mat-button class="fw-semibold bg-warning text-white">+ CARRITO</button>
+  </mat-card-actions>
+</mat-card>

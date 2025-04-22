@@ -1,0 +1,10 @@
+<section class="d-flex justify-content-center align-items-center flex-wrap gap-2 gap-sm-5 my-5">
+  <ng-container *ngFor="let img of images" >
+    <div class="position-relative">
+      <img src="{{img.img}}" class="img-fluid imagen " alt="{{img.id}}">
+      <div class="heart__box bg-body" (click)="MarcarFavorito($event)"  >
+        <i class="fa-regular fa-heart corazon" ></i>
+      </div>
+    </div>
+  </ng-container>
+</section>
