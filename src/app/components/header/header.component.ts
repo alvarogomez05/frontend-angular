@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AskResetPasswordComponent} from "../modales/ask-reset-password/ask-reset-password.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,8 @@ import {AskResetPasswordComponent} from "../modales/ask-reset-password/ask-reset
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
+   constructor(private router: Router) {}
 
    carritoItems= 0;
 
@@ -70,6 +73,7 @@ export class HeaderComponent {
     this.carritoItems = 7;
   }
 
-
-
+  logOut(){
+    localStorage.clear();
+    this.router.navigate(['/login']);   }
 }

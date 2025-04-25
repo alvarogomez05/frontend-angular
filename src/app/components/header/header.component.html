@@ -28,9 +28,11 @@
         <li class="nav-item  position-relative">
           <button class="nav-link" mat-button (click)="showChangePassword()"><span [ngClass]="themeClass" >Perfil</span> <i class="fa-solid fa-user icon"></i></button>
           <div class=" shadow rounded d-none" id="menu" [ngClass]="menu">
-            <p class="" mat-menu-item (click)="changePassword()">Cambiar contraseña</p>
+            <p class="btn" mat-menu-item (click)="changePassword()">Cambiar contraseña</p>
             <button class="btn rounded-fill" id="btnTheme" (click)="ChangeTheme()"><i id="moon" class="fa-solid fa-moon"></i>
               <i id="sun" class="fa-solid fa-sun d-none"></i></button>
+            <p class="btn" mat-menu-item (click)="logOut()">Cerrar Sesión</p>
+
           </div>
         </li>
 
