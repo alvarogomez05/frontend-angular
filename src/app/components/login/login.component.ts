@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ClientesServiceService} from "../../sevices/clientesService/clientes-service.service";
 import { Cliente } from '../../models/cliente.model';
 import { EmpleadosServicesService } from 'src/app/sevices/empleadosService/empleados-services.service';
+import { Empleado } from 'src/app/models/empleado.model';
 
 
 @Component({
@@ -23,44 +24,66 @@ export class LoginComponent {
   private clientes: Cliente[]=[];
 
   onSubmitClient(email : String,pwd : String) {
-
-    //console.log(email + " - " + pwd );
-
-    this.clientesService.getClientes().subscribe(
-      data =>{ this.clientes = data
-      console.log(this.clientes)
+    let cliente = {
+      'email': email,
+      'password': pwd,
+    }
+    // @ts-ignore
+    this.clientesService.getClientes(cliente).subscribe(response => {
+      if(response.body.status){
+        //no puede entrar
+        return 1;
       }
-    )
-
-    this.clientes.forEach(cliente => {
-      if(cliente.email == email){
-        console.log('Las credenciales coinciden');
-        this.guardarLocalStorageClient(cliente);
-        this.RedirectCliente()
-      }else{
-        //console.log('Las credenciales no coinciden');
-      }
-    })
+        this.guardarLocalStorageClient(response.body);
+    }, error => {
+      console.error('Error status:', error.status);    
+    });
   }
 
   guardarLocalStorageClient(cliente : Cliente){
     console.log(cliente);
     let user = {'rol': 'cliente',
-                                    'user': cliente}
-
+                'user': cliente}
     localStorage.setItem("usuario",JSON.stringify(user))
+    this.RedirectCliente();
   }
 
   RedirectCliente() {
     this.router.navigate(['hype/']);
   }
 
-  onSubmitEmployee() {
+  onSubmitEmployee(email: String, pwd: String, dni: String) {
+    let empleado = {
+      'dni':dni,
+      'email':email,
+      'password':pwd,
+    }
 
-    //peticion al servicio de empeados y comprobacion de credenciales.
+     // @ts-ignore
+     this.empleadosService.getEmples(empleado).subscribe(response => {
+      if(response.body.status){
+        //no puede entrar
+        return 1;
+      }
+        this.guardarLocalStorageEmployee(response.body);
+    }, error => {
+      console.error('Error status:', error.status);    
+    });
 
-    // @ts-ignore
-  this.router.navigate(['/hype/gestion']);  // Redirigir a la gestion del empleado
+  }
+
+  guardarLocalStorageEmployee(empleado: Empleado){
+    console.log(empleado)
+    let user2= {
+      'rol':'empleado',
+      'user': empleado,
+    }
+    localStorage.setItem("usuario",JSON.stringify(user2))
+    this.RedirectEmployee();
+  }
+
+  RedirectEmployee() {
+    this.router.navigate(['/hype/gestion']);  // Redirigir a la gestion del empleados
   }
 
   // FUNCIONES PARA CAMBIAR DE UN FORMULARIO A OTRO

@@ -13,7 +13,7 @@
       <div class=" w-100 h p-5 d-flex align-content-center justify-content-center ">
         <section id="empleadosForm" class="d-flex flex-column align-content-center justify-content-center bg-white w-75 p-5 rounded shadow d-none">
           <h3 class="text-center  mb-4 text-azul">Iniciar Sesión</h3>
-          <form  #formEmpleado="ngForm" (ngSubmit)="onSubmitEmployee()" >
+          <form  #formEmpleado="ngForm" (ngSubmit)="onSubmitEmployee(mailModel.value,contraseniaModel.value,dniModel.value)" >
             <mat-form-field appearance="outline" class="col-12">
               <mat-label>DNI</mat-label>
               <input
