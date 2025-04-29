@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AskResetPasswordComponent} from "../modales/ask-reset-password/ask-reset-password.component";
 import { Router } from '@angular/router';
+import { CarritoServiceService } from 'src/app/sevices/carritoService/carrito-service.service';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +11,19 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
 
-   constructor(private router: Router) {}
+   constructor(private router: Router,private carritoService: CarritoServiceService) {}
 
    carritoItems= 0;
+   rol = '';
 
    ngOnInit() {
-     this.UpdateBadge();
+    //@ts-ignore
+    this.rol = JSON.parse(localStorage.getItem('usuario')).rol;
+    // console.log(this.rol)
+
+    if(this.rol == 'cliente'){
+      this.UpdateBadge();
+    }
    }
 
   // @ts-ignore
@@ -69,8 +77,14 @@ export class HeaderComponent {
   //numero de productos en el carrito
 
   UpdateBadge(){
-     //peticion a la api que nos devuleva el numeor de producto que tiene en el carrito la persona logeada
-    this.carritoItems = 7;
+    //@ts-ignore
+    let id = JSON.parse(localStorage.getItem('usuario'));
+     console.log(id.user.usuario.id_cliente)
+     this.carritoService.getCarritoById(id.user.usuario.id_cliente).subscribe(response =>{
+      console.log(response)
+      this.carritoItems = response.length;
+     })
+
   }
 
   logOut(){
