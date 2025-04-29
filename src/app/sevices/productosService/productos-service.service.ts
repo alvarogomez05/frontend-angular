@@ -36,4 +36,16 @@ export class ProductosServiceService {
     )
 
   }
+
+  postProduct(producto: any): Observable<any> {
+    return this.http.post('http://localhost:5002/api/productos', producto);
+  }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete('http://localhost:5002/api/productos/'+id);
+  }
+
+  updateProduct(id: number, data: any): Observable<any> {
+    return this.http.put('http://localhost:5002/api/productos/'+id, data);
+  }
 }

@@ -28,4 +28,35 @@ export class GestionProductosComponent {
     )
   }
 
+  newProduct(nombre: any,descripcion: any,precio: any,stock: any,categoria: any){
+    console.log("nuevo producto")
+
+    console.log(nombre + "" + precio)
+
+    let producto = {
+      nombre: nombre,
+      descripcion:descripcion,
+      precio:precio,
+      stock:stock,
+      categoria:categoria,
+    }
+
+    this.productService.postProduct(producto).subscribe(response => {
+      console.log('Producto creado:', response);
+    });
+    
+    window.location.reload();
+
+
+  }
+
+  showModal(){
+    document.getElementById('modal__aniadir')?.classList.add('d-block')
+  }
+
+  removeModal(){
+    document.getElementById('modal__aniadir')?.classList.remove('d-block')
+
+  }
+
 }

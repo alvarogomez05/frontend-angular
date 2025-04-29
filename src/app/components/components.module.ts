@@ -31,8 +31,6 @@ import { BtnTopComponent } from './btn-top/btn-top.component';
 import { ResetPasswordComponent } from './modales/reset-password/reset-password.component';
 import { VerifyResetPasswordComponent } from './modales/verify-reset-password/verify-reset-password.component';
 import { AskResetPasswordComponent } from './modales/ask-reset-password/ask-reset-password.component';
-import { DeleteProductComponent } from './modales/delete-product/delete-product.component';
-import { UpdateProductComponent } from './modales/update-product/update-product.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatCardModule} from "@angular/material/card";
@@ -61,8 +59,6 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     ResetPasswordComponent,
     VerifyResetPasswordComponent,
     AskResetPasswordComponent,
-    DeleteProductComponent,
-    UpdateProductComponent
   ],
   imports: [
     CommonModule,

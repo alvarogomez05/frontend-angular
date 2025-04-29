@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ProductosServiceService } from 'src/app/sevices/productosService/productos-service.service';
 
 @Component({
   selector: 'app-productos-card',
@@ -6,6 +7,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./productos-card.component.scss']
 })
 export class ProductosCardComponent {
+
+    constructor(private productService : ProductosServiceService) {}
 
   @Input() producto: any;
 
@@ -21,41 +24,50 @@ export class ProductosCardComponent {
   rol = '';
 
   ngOnInit() {
-
     //@ts-ignore
     this.rol = JSON.parse(localStorage.getItem('usuario')).rol
   }
 
   // Coger el id del producto elegido
 
-  takeId(event: Event){
-    let id = 0;
-
-    //@ts-ignore
-    if (event.target.tagName == "SPAN") {
-      //@ts-ignore
-      id= event.target.parentElement.parentElement.parentElement.id;
-    }else{
-      ///@ts-ignore
-      id= event.target.parentElement.parentElement.parentElement.parentElement.id;
-    }
-
-    console.log("id del producto: " + id)
-    return id;
-  }
-
+ 
   // borrar producto
 
-  update(event: Event) {
-    let id = this.takeId(event)
+  update(id: any,nombre: any,descripcion: any,precio: any,stock: any,categoria: any) {
+    let data = {
+      nombre: nombre,
+      descripcion: descripcion,
+      precio: precio,
+      stock: stock,
+      categoria: categoria
+    }
 
+    this.productService.updateProduct(id,data).subscribe(response =>{
+      console.log(response)
+    })
+
+    window.location.reload();
   }
 
   // editar producto
 
-  delete(event: Event) {
-    let id = this.takeId(event)
+  delete(id: any) {
     
+    this.productService.deleteProduct(id).subscribe(response => {
+      console.log(response)
+    })
+
+    window.location.reload();
+
   }
 
+  showModal(id: { toString: () => string; }){
+    console.log(id.toString())
+    console.log(document.getElementById(id.toString()))
+    document.getElementById(id.toString())?.classList.remove('d-none')
+  }
+
+  removeModal(id: any){
+    document.getElementById(id.toString())?.classList.add('d-none')
+  }
 }

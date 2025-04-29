@@ -1,4 +1,5 @@
-<mat-card class=" card d-flex flex-column justify-content-between" [ngClass]="themeClass" data-id='{{producto.id_producto}}'>
+<mat-card class=" card d-flex flex-column justify-content-between" [ngClass]="themeClass" [attr.data-status]="producto.id_producto"
+>
   <img mat-card-image src="{{img}}" alt="Photo of a Shiba Inu"> 
   <mat-card-content>
     <p class="text-start fw-semibold">{{producto.nombre}}</p>
@@ -16,13 +17,122 @@
   </mat-card-actions>
   <ng-template #Empleado>
     <mat-card-actions class="justify-content-end">
-      <button mat-button class="text-primary" (click)="update($event)">
+      <button mat-button class="text-primary" (click)="showModal(producto.id_producto)">
         <i class="fa-solid fa-pen-to-square"></i>
       </button>
-      <button mat-button class="text-danger" (click)="delete($event)">
+      <button mat-button class="text-danger" (click)="delete(producto.id_producto)">
         <i class="fa-solid fa-trash"></i>
       </button>
       
     </mat-card-actions>
   </ng-template>
 </mat-card>
+
+<div id="{{producto.id_producto}}" class="delete__modal d-none">
+  <div class="d-flex justify-content-between">
+    <p>Editar Producto con id {{producto.id_producto}}</p>
+    <p (click)="removeModal(producto.id_producto)">X</p>
+  </div>
+  <form  (ngSubmit)="update(producto.id_producto,nombreModel.value,descripcionModel.value,precioModel.value,stockModel.value,categoriaModel.value)" >
+    <mat-form-field appearance="outline" class="col-12">
+      <mat-label>Nombre</mat-label>
+      <input
+        matInput
+        name="nombre"
+        placeholder="nombre"
+        required
+        ngModel
+        #nombreModel="ngModel"
+        [(ngModel)]="producto.nombre"
+        />
+      <mat-error *ngIf="nombreModel.value == ''"
+      >El nombre es obligatorio</mat-error
+      >
+      <mat-error *ngIf="nombreModel.value !=='' && nombreModel.invalid">El nombre no cumple el formato</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-12">
+      <mat-label>Descripcion</mat-label>
+      <input
+        matInput
+        name="descripcion"
+        placeholder="descripcion"
+        required
+        type="text"
+        ngModel
+        #descripcionModel="ngModel"
+        [(ngModel)]="producto.descripcion"
+      />
+      <mat-error *ngIf="descripcionModel.value==''"
+      >La descripción es obligatorio</mat-error
+      >
+      <mat-error *ngIf="descripcionModel.value !== '' && descripcionModel.invalid">
+        La descripción no cumple el formato
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-12">
+      <mat-label>precio</mat-label>
+      <input
+        matInput
+        type="number"
+        name="precio"
+        placeholder="precio"
+        required
+        ngModel
+        #precioModel="ngModel"
+        min=0
+        [(ngModel)]="producto.precio"
+        />
+      <mat-error *ngIf="precioModel.value == ''">
+        El precio es obligatoria</mat-error
+      >
+      <mat-error *ngIf="precioModel.value !== '' && precioModel.invalid">
+        El precio ha de ser mayor que 0
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Stock</mat-label>
+        <input
+          matInput
+          type="number"
+          name="stock"
+          placeholder="stock"
+          required
+          ngModel
+          #stockModel="ngModel"
+          min=1
+          [(ngModel)]="producto.stock"
+          />
+        <mat-error *ngIf="stockModel.value == ''">
+          El stock es obligatoria</mat-error
+        >
+        <mat-error *ngIf="stockModel.value !== '' && stockModel.invalid">
+          El stock ha de ser minimo 1
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Categoria</mat-label>
+        <input
+          matInput
+          name="categoria"
+          placeholder="categoria"
+          required
+          ngModel
+          #categoriaModel="ngModel"
+          [(ngModel)]="producto.categoria"
+        />
+        <mat-error *ngIf="categoriaModel.value == ''"
+        >La categoria es obligatorio</mat-error
+        >
+        <mat-error *ngIf="categoriaModel.value !=='' && categoriaModel.invalid">La categoria no cumple el formato</mat-error>
+      </mat-form-field>
+
+    <button class="col-12" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
+            [disabled]="nombreModel.invalid || descripcionModel.invalid || precioModel.invalid || stockModel.invalid || categoriaModel.invalid"
+            [ngClass]="{'grayscale': nombreModel.invalid || descripcionModel.invalid || precioModel.invalid || stockModel.invalid || categoriaModel.invalid}"
+            >Editar producto</button>
+  </form>
+</div>

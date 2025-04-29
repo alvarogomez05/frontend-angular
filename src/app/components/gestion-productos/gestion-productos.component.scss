@@ -1,0 +1,22 @@
+.btn__aniadir{
+    background-color: #55C0FD;
+    color: #fff;
+}
+
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.24);
+    width: 500px;
+    padding: 1rem;
+    height: 400px;
+    border-radius: 5px;
+}
+
+.grayscale {
+    filter: grayscale(100%);
+    pointer-events: none;  /* Para evitar interacciones cuando está deshabilitado */
+  }
