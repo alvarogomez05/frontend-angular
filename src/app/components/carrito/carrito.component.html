@@ -1,1 +1,59 @@
-<p>carrito works!</p>
+<div class="container">
+
+    <!-- Este va a ser el frontend del carrito -->
+     <div class="carrito__header">
+        <h1>Carrito</h1>
+        <p><span>
+            <!-- {{numero de productos}} -->
+             {{carritoItems}}
+        </span> items</p>
+     </div>
+
+     <!-- Aqui habrá un main -->
+      <main class="main">
+        <!-- En esta caja se muestran lso productos -->
+         <!-- *ngFor="let producto of productos" -->
+         <div class="carrito__productos">
+            <!-- Se muestran a traves de un for con la info -->
+             <!-- ejemplo de 1 producto en el carrito -->
+              <div class="carrito__producto" *ngFor="let producto of productos">
+                <!-- clase img-fluid o algo asi de bootstrap -->
+                <img src="{{producto.imagen}}" alt="" class="carrito__producto__imagen img-fluid">
+                <!-- el texto del producot -->
+                <div class="box">
+                    <div class="carrito__producto__text">
+                        <p>{{producto.nombre}}</p>
+                        <p>{{producto.precio}}</p>
+                    </div>
+                    <div class="delete__box">
+                        <!-- Icono para borrar el producto del carrito -->
+                         <p class="btn btn__delete" (click)="DeleteCarrito(id,producto.id_producto)">ELIMINAR</p>
+                    </div>
+                </div>
+              </div>
+         </div>
+         <!-- En esta caja se muestra el resumen de la compra -->
+          <div class="resumen">
+            <h2>Resúmen de compra</h2>
+            <div>
+                <div class="resumen__box">
+                    <p>Subtotal</p>
+                    <p>{{subtotal}}</p>
+                </div>
+                <div class="resumen__box">
+                    <p>Envío</p>
+                    <p>3.99</p>
+                </div>
+                <!-- Subtotal más envio -->
+                <div class="resumen__box">
+                    <p>Totál</p>
+                    <p>{{subtotal+3.99}}</p>
+                </div>
+            </div>
+            <!-- Aqui va el boton de realizar la compra, no se sabe con que se va  ahacer todavía -->
+             <button class="btn btn__pay">
+                PAYPAL
+             </button>
+          </div>
+      </main>
+</div>

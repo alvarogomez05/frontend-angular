@@ -16,14 +16,14 @@ export class LoginComponent {
 
   constructor(private router: Router,private clientesService: ClientesServiceService, private empleadosService: EmpleadosServicesService) {}
 
+  entra : boolean = true;
 
 
-
-  // CAMBIARLO PARA HACER LA PETICION AL SERVICIO Y COMPROBAR SI PUEDEN ENTRAR O NO
   // @ts-ignore
   private clientes: Cliente[]=[];
 
   onSubmitClient(email : String,pwd : String) {
+    this.entra = true;
     let cliente = {
       'email': email,
       'password': pwd,
@@ -32,8 +32,10 @@ export class LoginComponent {
     this.clientesService.getClientes(cliente).subscribe(response => {
       if(response.body.status){
         //no puede entrar
+        this.entra = false;
         return 1;
       }
+      this.entra = true;
         this.guardarLocalStorageClient(response.body);
     }, error => {
       console.error('Error status:', error.status);    
@@ -53,6 +55,7 @@ export class LoginComponent {
   }
 
   onSubmitEmployee(email: String, pwd: String, dni: String) {
+    this.entra = true;
     let empleado = {
       'dni':dni,
       'email':email,
@@ -63,8 +66,10 @@ export class LoginComponent {
      this.empleadosService.getEmples(empleado).subscribe(response => {
       if(response.body.status){
         //no puede entrar
+        this.entra = false;
         return 1;
       }
+      this.entra = true;
         this.guardarLocalStorageEmployee(response.body);
     }, error => {
       console.error('Error status:', error.status);    
@@ -89,6 +94,7 @@ export class LoginComponent {
   // FUNCIONES PARA CAMBIAR DE UN FORMULARIO A OTRO
 
   showClients() {
+    this.entra = true;
     let clientes = document.getElementById("clientesForm")
     let empleados = document.getElementById("empleadosForm")
 
@@ -99,6 +105,7 @@ export class LoginComponent {
   }
 
   showEmployees() {
+    this.entra = true;
     let clientes = document.getElementById("clientesForm")
     let empleados = document.getElementById("empleadosForm")
 

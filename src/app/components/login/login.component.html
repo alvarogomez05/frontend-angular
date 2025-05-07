@@ -75,6 +75,7 @@
                     [ngClass]="{'grayscale': dniModel.invalid || mailModel.invalid || contraseniaModel.invalid}"
                     >Iniciar sesión</button>
           </form>
+          <p class="text-danger text-center mt-2" *ngIf="entra == false;">El correo, la contraseña y/o el dni son incorrectos</p>
           <div class="w-100 text-end mt-4">
             <span (click)="showClients()" class="text-azul">Cliente</span>
           </div>
@@ -129,6 +130,7 @@
           </form>
           <button class="col-12 mt-4" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
            (click)="Register()">Registrarse</button>
+          <p class="text-danger text-center mt-2" *ngIf="entra == false;">El correo y/o la contraseña son incorrectos</p>
           <div class="w-100 text-end mt-4">
             <span (click)="showEmployees()" class="text-azul">Empleado</span>
           </div>

@@ -1,1 +1,66 @@
-<p>favoritos works!</p>
+<div class="container">
+
+    <!-- Este va a ser el frontend del favorito -->
+     <div class="favorito__header">
+        <h1>Favoritos</h1>
+        <p><span>
+            <!-- {{numero de productos}} -->
+             {{favoritos.length}}
+        </span> items</p>
+     </div>
+
+
+     
+     <main class="main" *ngIf="favoritos.length > 0; else NoFav">
+        <!-- En esta caja se muestran lso productos -->
+         <!-- *ngFor="let producto of productos" -->
+ <div class="favorito__productos" >
+            <!-- Se muestran a traves de un for con la info -->
+             <!-- ejemplo de 1 producto en el favorito -->
+              <div class="favorito__producto" *ngFor="let producto of productos">
+                <!-- clase img-fluid o algo asi de bootstrap -->
+                <img src="{{producto.imagen}}" alt="" class="favorito__producto__imagen img-fluid">
+                <!-- el texto del producot -->
+                <div class="box">
+                    <div class="favorito__producto__text">
+                        <p>{{producto.nombre}}</p>
+                        <div class="subBox">
+                            <p>{{producto.precio}}</p>
+                            <!-- Icono del corazón para quitar de favoritos -->
+                            <p class="btn corazon" (click)="DeleteFavorito(id,producto.id_producto)"><i class="fa-solid fa-heart-crack"></i></p>
+                        </div>
+                    </div>
+                    <div class="btn__box">
+                        <!-- boton Para añadir al carrito desde aquí -->
+                         <p class="btn btn__aniadir" (click)="PostCarrito(id,producto.id_producto)">Añadr al carrito</p>
+                    </div>
+                </div>
+              </div>
+         </div>
+        
+        
+         <!-- En esta caja se muestra el resumen de la compra -->
+          <div class="resumen">
+            <h2>Resúmen de compra</h2>
+            <div>
+                <div class="resumen__box">
+                    <p>Subtotal</p>
+                    <p>{{subtotal}}</p>
+                </div>
+                <div class="resumen__box">
+                    <p>Envío</p>
+                    <p>3.99</p>
+                </div>
+                <!-- Subtotal más envio -->
+                <div class="resumen__box">
+                    <p>Totál</p>
+                    <p>{{subtotal + 3.99}}</p>
+                </div>
+            </div>
+            <!-- Aqui no hay botón de comprar -->
+          </div>
+      </main>
+      <ng-template #NoFav>
+        <h1>NO TIENES NINGÚN PRODUCTO AÑADIDO A FAVORITOS</h1>
+      </ng-template>
+</div>

@@ -28,6 +28,7 @@ export class ProductosServiceService {
             item.precio,
             item.stock,
             item.categoria,
+            item.imagen
           ));
         } else {
           throw new Error('La respuesta no es un array');
@@ -47,5 +48,9 @@ export class ProductosServiceService {
 
   updateProduct(id: number, data: any): Observable<any> {
     return this.http.put('http://localhost:5002/api/productos/'+id, data);
+  }
+
+  getProductoById(id: number): Observable<any> {
+    return this.http.get("http://localhost:5002/api/productos/"+id);
   }
 }

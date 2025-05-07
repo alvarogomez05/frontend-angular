@@ -1,6 +1,6 @@
 <mat-card class=" card d-flex flex-column justify-content-between" [ngClass]="themeClass" [attr.data-status]="producto.id_producto"
 >
-  <img mat-card-image src="{{img}}" alt="Photo of a Shiba Inu"> 
+  <img mat-card-image [src]="producto.imageUrl" alt=""> 
   <mat-card-content>
     <p class="text-start fw-semibold">{{producto.nombre}}</p>
     <p class="text-start">
@@ -12,8 +12,8 @@
 
   </mat-card-content>
   <mat-card-actions *ngIf="rol == 'cliente';else Empleado">
-    <button mat-button><i class="fa-solid fa-heart text-danger"></i></button>
-    <button mat-button class="fw-semibold bg-warning text-white">+ CARRITO</button>
+    <button mat-button (click)="PostFavoritos(id_cliente,producto.id_producto)"><i class="fa-solid fa-heart text-danger" ></i></button>
+    <button mat-button class="fw-semibold bg-warning text-white" (click)="PostCarrito(id_cliente,producto.id_producto)">+ CARRITO</button>
   </mat-card-actions>
   <ng-template #Empleado>
     <mat-card-actions class="justify-content-end">

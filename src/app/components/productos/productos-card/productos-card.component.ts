@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { CarritoServiceService } from 'src/app/sevices/carritoService/carrito-service.service';
+import { FavoritosServiceService } from 'src/app/sevices/favoritosService/favoritos-service.service';
 import { ProductosServiceService } from 'src/app/sevices/productosService/productos-service.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { ProductosServiceService } from 'src/app/sevices/productosService/produc
 })
 export class ProductosCardComponent {
 
-    constructor(private productService : ProductosServiceService) {}
+    constructor(private productService : ProductosServiceService, private CarritoService: CarritoServiceService, private FavoritoService : FavoritosServiceService) {}
 
   @Input() producto: any;
 
@@ -22,6 +24,9 @@ export class ProductosCardComponent {
   }
 
   rol = '';
+  //@ts-ignore
+  id_cliente: string = JSON.parse(localStorage.getItem('usuario'));
+
 
   ngOnInit() {
     //@ts-ignore
@@ -69,5 +74,20 @@ export class ProductosCardComponent {
 
   removeModal(id: any){
     document.getElementById(id.toString())?.classList.add('d-none')
+  }
+
+  PostCarrito(id_cliente: any,id_producto: any){
+    this.CarritoService.PostCarrito(id_cliente.user.usuario.id_cliente,id_producto).subscribe(response =>{
+      console.log(response)
+      window.location.reload();
+
+    })
+  }
+
+  PostFavoritos(id_cliente: any,id_producto:any){
+    this.FavoritoService.PostFavoritos(id_cliente.user.usuario.id_cliente,id_producto).subscribe(response => {
+      console.log(response)
+      window.location.reload();
+    })
   }
 }
