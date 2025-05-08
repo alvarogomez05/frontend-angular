@@ -5,6 +5,7 @@ import {ClientesServiceService} from "../../sevices/clientesService/clientes-ser
 import { Cliente } from '../../models/cliente.model';
 import { EmpleadosServicesService } from 'src/app/sevices/empleadosService/empleados-services.service';
 import { Empleado } from 'src/app/models/empleado.model';
+import { AuthService } from 'src/app/auth.service';
 
 
 @Component({
@@ -14,9 +15,10 @@ import { Empleado } from 'src/app/models/empleado.model';
 })
 export class LoginComponent {
 
-  constructor(private router: Router,private clientesService: ClientesServiceService, private empleadosService: EmpleadosServicesService) {}
+  constructor(private router: Router,private clientesService: ClientesServiceService, private empleadosService: EmpleadosServicesService, private auth: AuthService) {}
 
   entra : boolean = true;
+  entraGoogle : boolean = true;
 
 
   // @ts-ignore
@@ -121,4 +123,26 @@ export class LoginComponent {
     console.log("go to register")
     this.router.navigate(['/register'])
   }
+
+  async loginWithGoogle() {
+    const userCredential = await this.auth.loginWithGoogle();
+
+    console.log(userCredential.email)
+
+    //@ts-ignore
+    this.clientesService.ComprobarLogGoogle(userCredential.email).subscribe(response => {
+      console.log(response)
+      //@ts-ignore
+      if(response.status){
+        //feedback login fallido
+        this.entraGoogle = false;
+        return -1;
+      }
+      this.entraGoogle = true;
+      //@ts-ignore
+      this.guardarLocalStorageClient({usuario: response.usuario})
+
+    })
+  }
+  
 }

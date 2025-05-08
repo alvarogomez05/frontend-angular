@@ -48,4 +48,10 @@ export class ClientesServiceService {
     })
   }
 
+  ComprobarLogGoogle(email: any){
+    return this.http.post('http://localhost:5002/api/clientes/google',{
+      email: email
+    })
+  }
+
 }

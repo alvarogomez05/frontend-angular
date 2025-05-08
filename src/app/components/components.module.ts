@@ -40,7 +40,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core'; // este puede ser necesario también
 
 
-
 @NgModule({
   declarations: [
     HeaderComponent,

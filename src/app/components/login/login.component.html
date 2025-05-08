@@ -128,9 +128,11 @@
                     [ngClass]="{'grayscale': mailModel2.invalid || contraseniaModel2.invalid}"
             >Iniciar sesión</button>
           </form>
+          <button (click)="loginWithGoogle()">Iniciar sesión con Google</button>
           <button class="col-12 mt-4" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
            (click)="Register()">Registrarse</button>
           <p class="text-danger text-center mt-2" *ngIf="entra == false;">El correo y/o la contraseña son incorrectos</p>
+          <p class="text-danger text-center mt-2" *ngIf="entraGoogle == false;">No existe una cuenta con ese correo electrónico</p>
           <div class="w-100 text-end mt-4">
             <span (click)="showEmployees()" class="text-azul">Empleado</span>
           </div>

@@ -10,19 +10,19 @@
         producto.descripcion
       }}
     </p>
-    <p class="text-end">{{producto.precio}}</p>
+    <p class="text-end">{{producto.precio}} €</p>
 
   </mat-card-content>
   <mat-card-actions *ngIf="rol == 'cliente';else Empleado">
-    <button mat-button (click)="PostFavoritos(id_cliente,producto.id_producto)"><i class="fa-solid fa-heart text-danger" ></i></button>
-    <button mat-button class="fw-semibold bg-warning text-white" (click)="PostCarrito(id_cliente,producto.id_producto)">+ CARRITO</button>
+    <button mat-button (click)="PostFavoritos(id_cliente,producto.id_producto)" class="btn"><i class="fa-solid fa-heart text-danger" ></i></button>
+    <button mat-button class="fw-semibold bg-warning text-white btn" (click)="PostCarrito(id_cliente,producto.id_producto)">+ CARRITO</button>
   </mat-card-actions>
   <ng-template #Empleado>
     <mat-card-actions class="justify-content-end">
-      <button mat-button class="text-primary" (click)="showModal(producto.id_producto)">
+      <button mat-button class="text-primary btn" (click)="showModal(producto.id_producto)">
         <i class="fa-solid fa-pen-to-square"></i>
       </button>
-      <button mat-button class="text-danger" (click)="delete(producto.id_producto)">
+      <button mat-button class="text-danger btn" (click)="delete(producto.id_producto)">
         <i class="fa-solid fa-trash"></i>
       </button>
       

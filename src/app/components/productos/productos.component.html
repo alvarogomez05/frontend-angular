@@ -5,7 +5,7 @@
 <p class="btn btn__filtrar mx-5" (click)="showFilter()">FILTRAR</p>
 
 <div *ngIf="loading === false" class="d-flex gap-1 gap-sm-3 gap-md-5 flex-wrap flex-row w-100 justify-content-center p-5">
-  <app-productos-card *ngFor="let producto of productos" [producto]="producto"  class="shadow rounded my-2"></app-productos-card>
+  <app-productos-card *ngFor="let producto of productos" [producto]="producto"  class="shadow rounded my-2 tarjeta"></app-productos-card>
 </div>
 
 
