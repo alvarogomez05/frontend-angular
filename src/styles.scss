@@ -43,3 +43,10 @@ body{
 html, body { height: 100%; }
 body { margin: 0 auto; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.cdk-overlay-pane {
+  z-index: 9999 !important; // más alto que cualquier z-index de tu modal
+}
+
+.cdk-overlay-container {
+  z-index: 2000 !important;
+}

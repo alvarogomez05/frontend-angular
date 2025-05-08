@@ -65,13 +65,23 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="col-12">
-      <mat-label>Categoria</mat-label>
-      <input matInput name="categoria" placeholder="categoria" required ngModel #categoriaModel="ngModel" />
-      <mat-error *ngIf="categoriaModel.value == ''">La categoria es obligatorio</mat-error>
-      <mat-error *ngIf="categoriaModel.value !=='' && categoriaModel.invalid">La categoria no cumple el
-        formato</mat-error>
+    <mat-form-field appearance="outline" class="col-12 select">
+      <mat-label>Categoría</mat-label>
+      <mat-select name="categoria" required ngModel #categoriaModel="ngModel" panelClass="custom-select-panel">
+        <mat-option value="">Seleccione una categoría</mat-option>
+        <mat-option value="Zapatillas">Zapatillas</mat-option>
+        <mat-option value="Ropa">Ropa</mat-option>
+        <mat-option value="Accesorios">Accesorios</mat-option>
+        <!-- Agrega más opciones según lo que necesites -->
+      </mat-select>
+    
+      <mat-error *ngIf="categoriaModel.value === ''">La categoría es obligatoria</mat-error>
+      <mat-error *ngIf="categoriaModel.invalid && categoriaModel.value !== ''">
+        La categoría no cumple el formato
+      </mat-error>
     </mat-form-field>
+    
+    
 
     <button class="col-12" style="backgroundColor: #55C0FD; color: white;" mat-raised-button type="submit"
       [disabled]="nombreModel.invalid || descripcionModel.invalid || precioModel.invalid || stockModel.invalid || categoriaModel.invalid"

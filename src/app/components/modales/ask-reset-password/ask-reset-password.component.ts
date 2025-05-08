@@ -14,12 +14,16 @@ export class AskResetPasswordComponent {
   constructor(private clientesService: ClientesServiceService) {}
 
   //@ts-ignore
-  user = JSON.parse(localStorage.getItem('usuario')).user.usuario.email
-  //@ts-ignore
-
+  user : any = '';
 
   ngOnInit() {
     emailjs.init('0wgPu1C_SkTQ0gYSb');
+
+    //@ts-ignore
+    if(JSON.parse(localStorage.getItem('usuario')).rol == 'cliente'){
+        //@ts-ignore
+        this.user = JSON.parse(localStorage.getItem('usuario')).user.usuario.email
+    }
 
     // console.log(user)
   }
@@ -45,17 +49,17 @@ export class AskResetPasswordComponent {
     })
 
     //Mandar el correo electronico
-    // emailjs.send("service_hyxlmfv", "template_1cmr1cq", {
-    //   email: email,
-    //   message: random
-    // }).then(
-    //   () => {
-    //     console.log('SUCCESS!');
-    //   },
-    //   (error: EmailJSResponseStatus) => {
-    //     console.log('FAILED...', error.text);
-    //   }
-    // );
+    emailjs.send("service_hyxlmfv", "template_1cmr1cq", {
+      email: email,
+      message: random
+    }).then(
+      () => {
+        console.log('SUCCESS!');
+      },
+      (error: EmailJSResponseStatus) => {
+        console.log('FAILED...', error.text);
+      }
+    );
 
     //Ocultar esta modal y mostrar la siguiente.
     // @ts-ignore

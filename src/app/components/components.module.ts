@@ -36,6 +36,10 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core'; // este puede ser necesario también
+
+
 
 @NgModule({
   declarations: [
@@ -74,7 +78,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatBadgeModule,
     MatCardModule,
     MatProgressSpinnerModule,
-
+    MatSelectModule,
+    MatOptionModule
   ],
   exports: [
     HeaderComponent,
