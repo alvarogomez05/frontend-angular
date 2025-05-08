@@ -36,6 +36,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatProgressSpinnerModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -39,6 +39,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core'; // este puede ser necesario también
 
+import { MatTreeModule } from '@angular/material/tree';
+
+
 
 @NgModule({
   declarations: [
@@ -78,7 +81,8 @@ import { MatOptionModule } from '@angular/material/core'; // este puede ser nece
     MatCardModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatTreeModule,
   ],
   exports: [
     HeaderComponent,

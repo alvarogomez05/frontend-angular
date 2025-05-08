@@ -38,3 +38,30 @@
 
 .text-reset:hover{
 text-decoration: underline}
+
+
+mat-tree-node {
+  display: block;
+}
+
+.tree-titulo{
+  color: #55C0FD;
+}
+
+.footer-pequeño{
+  display: block;
+}
+
+.footer-grande{
+  display: none;
+}
+
+@media (min-width: 768px){
+  .footer-pequeño{
+    display: none;
+  }
+  
+  .footer-grande{
+    display: block;
+  }
+}

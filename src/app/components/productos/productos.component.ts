@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {ProductosServiceService} from "../../sevices/productosService/productos-service.service";
-import {Productos} from "../../models/productos.model";
+import { ProductosServiceService } from "../../sevices/productosService/productos-service.service";
+import { Productos } from "../../models/productos.model";
 
 @Component({
   selector: 'app-productos',
@@ -9,13 +9,15 @@ import {Productos} from "../../models/productos.model";
 })
 export class ProductosComponent {
 
-  constructor(private productService : ProductosServiceService){}
+  constructor(private productService: ProductosServiceService) { }
 
   // @ts-ignore
-  protected productos : Productos[]=[];
-  protected Auxproductos : Productos[]=[];
+  protected productos: Productos[] = [];
+  protected Auxproductos: Productos[] = [];
 
   loading: boolean = true;
+  page = 1;
+  pageSize = 10;
 
   ngOnInit() {
     this.productService.getProducts().subscribe(
@@ -23,7 +25,7 @@ export class ProductosComponent {
         this.productos = data.map(producto => {
           //@ts-ignore
           if (producto.imagen && producto.imagen.data) {
-          //@ts-ignore
+            //@ts-ignore
             const byteArray = new Uint8Array(producto.imagen.data);
             const blob = new Blob([byteArray], { type: 'image/png' }); // Ajusta el tipo si no es PNG
             const imageUrl = URL.createObjectURL(blob);
@@ -40,16 +42,16 @@ export class ProductosComponent {
     );
   }
 
-  showFilter(){
+  showFilter() {
     document.getElementById('form-filter')?.classList.add('mostrar')
   }
 
-  closeModal(){
+  closeModal() {
     document.getElementById('form-filter')?.classList.remove('mostrar')
 
   }
 
-  submit(minPrice : any, maxPrice : any, categoria: any){
+  submit(minPrice: any, maxPrice: any, categoria: any) {
     console.log('filtrar')
     console.log(minPrice)
     console.log(maxPrice)
@@ -66,10 +68,26 @@ export class ProductosComponent {
 
   }
 
-  borrarFiltro(){
-    if(this.Auxproductos.length > 0)
-    this.productos = this.Auxproductos;
+  borrarFiltro() {
+    if (this.Auxproductos.length > 0)
+      this.productos = this.Auxproductos;
     // console.log(this.productos)
     document.getElementById('form-filter')?.classList.remove('mostrar')
+  }
+
+
+  get productosPaginados() {
+    const start = (this.page - 1) * this.pageSize;
+    return this.productos.slice(start, start + this.pageSize);
+  }
+  
+  totalPages(): number {
+    return Math.ceil(this.productos.length / this.pageSize);
+  }
+  
+  goToPage(n: number) {
+    if (n >= 1 && n <= this.totalPages()) {
+      this.page = n;
+    }
   }
 }
