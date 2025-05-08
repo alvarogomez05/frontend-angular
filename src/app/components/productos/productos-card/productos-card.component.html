@@ -1,6 +1,8 @@
-<mat-card class=" card d-flex flex-column justify-content-between" [ngClass]="themeClass" [attr.data-status]="producto.id_producto"
+<mat-card class=" card d-flex flex-column justify-content-between " [ngClass]="themeClass" [attr.data-status]="producto.id_producto"
 >
-  <img mat-card-image [src]="producto.imageUrl" alt=""> 
+<div class="img__box">
+  <img mat-card-image [src]="producto.imageUrl" alt="" class="img">   
+</div>
   <mat-card-content>
     <p class="text-start fw-semibold">{{producto.nombre}}</p>
     <p class="text-start">

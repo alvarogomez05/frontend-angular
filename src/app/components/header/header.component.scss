@@ -1,5 +1,18 @@
 .logotype{
   max-width: 150px;
+  position: relative;
+  animation: animacion 1s ease forwards;
+}
+
+@keyframes animacion {
+  from{
+    opacity: 0;
+    top: -100px;
+  }
+  to{
+    opacity: 1;
+    top: 0px;
+  }
 }
 
 .icon{
@@ -47,8 +60,7 @@ color: black;
 }
 
 
-.title__emple{
-  text-align: center;
-  font-weight: 700;
-  color: #55C0FD;
+.btn__nav{
+  background-color: #55C0FD;
+  color: #fff;
 }

@@ -45,9 +45,14 @@
         </ul>
       </div>
     </ng-container>
-    <ng-template #Empleado>
-        <h1 class="title__emple">      GESTIÓN DE PRODUCTOS
-        </h1>
+    <ng-template #Empleado >
+        <nav class="d-flex justify-content-end mx-5">
+          <div class="d-flex gap-3">
+            <p class="btn btn__nav">Historial Compras</p>
+            <p class="btn btn__nav" (click)="logOut()">Cerrar Sesión</p>
+          </div>
+        
+        </nav>
     </ng-template>
   </div>
 </nav>

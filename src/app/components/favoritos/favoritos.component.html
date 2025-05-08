@@ -11,7 +11,7 @@
 
 
      
-     <main class="main" *ngIf="favoritos.length > 0; else NoFav">
+     <main class="main d-flex flex-wrap flex-column flex-md-row" *ngIf="favoritos.length > 0; else NoFav">
         <!-- En esta caja se muestran lso productos -->
          <!-- *ngFor="let producto of productos" -->
  <div class="favorito__productos" >
@@ -25,7 +25,7 @@
                     <div class="favorito__producto__text">
                         <p>{{producto.nombre}}</p>
                         <div class="subBox">
-                            <p>{{producto.precio}}</p>
+                            <p>{{producto.precio}} €</p>
                             <!-- Icono del corazón para quitar de favoritos -->
                             <p class="btn corazon" (click)="DeleteFavorito(id,producto.id_producto)"><i class="fa-solid fa-heart-crack"></i></p>
                         </div>
@@ -45,22 +45,22 @@
             <div>
                 <div class="resumen__box">
                     <p>Subtotal</p>
-                    <p>{{subtotal}}</p>
+                    <p>{{subtotal}} €</p>
                 </div>
                 <div class="resumen__box">
                     <p>Envío</p>
-                    <p>3.99</p>
+                    <p>3.99 €</p>
                 </div>
                 <!-- Subtotal más envio -->
                 <div class="resumen__box">
-                    <p>Totál</p>
-                    <p>{{subtotal + 3.99}}</p>
+                    <p class="negrita">Totál</p>
+                    <p class="negrita">{{subtotal + 3.99}} €</p>
                 </div>
             </div>
             <!-- Aqui no hay botón de comprar -->
           </div>
       </main>
       <ng-template #NoFav>
-        <h1>NO TIENES NINGÚN PRODUCTO AÑADIDO A FAVORITOS</h1>
+        <h1 class="message">NO TIENES NINGÚN PRODUCTO AÑADIDO A FAVORITOS</h1>
       </ng-template>
 </div>

@@ -1,7 +1,17 @@
-<div class="d-flex justify-content-center gap-3 align-items-baseline">
-  <p class="">Añade un producto</p>
-  <button class="btn btn__aniadir" (click)="showModal()"><i class="fa-solid fa-plus"></i></button>
+<div class="gestion__header">
+  <h1 class="title__emple text-center w-75">      GESTIÓN DE PRODUCTOS
+  </h1>
 </div>
+
+
+<div class="w-100 d-flex justify-content-center py-4">
+  <div class="d-flex justify-content-center gap-3 align-items-baseline btn__aniadir
+  rounded btn ancho" (click)="showModal()">
+    <p class="">Añade un producto</p>
+    <button class=" btn btn__aniadir " (click)="showModal()"><i class="fa-solid fa-plus"></i></button>
+  </div>
+</div>
+
 
 <div class="d-flex gap-1 gap-sm-3 gap-md-5 flex-wrap flex-row w-100 justify-content-center p-5 ">
   <app-productos-card *ngFor="let producto of productos" [producto]="producto"

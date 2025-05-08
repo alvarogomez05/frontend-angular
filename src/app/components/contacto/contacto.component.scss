@@ -60,7 +60,27 @@
   }
 }
 
+.ancho{
+  width: 100%;
+}
 
+@media (min-width: 768px) {
+  .ancho{
+    width: 60%;
+  }
+}
+
+@media (min-width: 992px) {
+  .ancho{
+    width: 45%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ancho{
+    width: 40%;
+  }
+}
 
 //
 

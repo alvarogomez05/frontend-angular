@@ -10,7 +10,7 @@
      </div>
 
      <!-- Aqui habrá un main -->
-      <main class="main">
+      <main class="main d-flex flex-wrap flex-column flex-md-row " *ngIf="carritoItems > 0; else NoCart">
         <!-- En esta caja se muestran lso productos -->
          <!-- *ngFor="let producto of productos" -->
          <div class="carrito__productos">
@@ -23,7 +23,7 @@
                 <div class="box">
                     <div class="carrito__producto__text">
                         <p>{{producto.nombre}}</p>
-                        <p>{{producto.precio}}</p>
+                        <p>{{producto.precio}} €</p>
                     </div>
                     <div class="delete__box">
                         <!-- Icono para borrar el producto del carrito -->
@@ -38,16 +38,16 @@
             <div>
                 <div class="resumen__box">
                     <p>Subtotal</p>
-                    <p>{{subtotal}}</p>
+                    <p>{{subtotal}} €</p>
                 </div>
                 <div class="resumen__box">
                     <p>Envío</p>
-                    <p>3.99</p>
+                    <p>3.99 €</p>
                 </div>
                 <!-- Subtotal más envio -->
                 <div class="resumen__box">
-                    <p>Totál</p>
-                    <p>{{subtotal+3.99}}</p>
+                    <p class="negrita">Totál</p>
+                    <p class="negrita">{{subtotal+3.99}} €</p>
                 </div>
             </div>
             <!-- Aqui va el boton de realizar la compra, no se sabe con que se va  ahacer todavía -->
@@ -56,4 +56,7 @@
              </button>
           </div>
       </main>
+      <ng-template #NoCart>
+        <h1 class="message">NO TIENES NINGÚN PRODUCTO AÑADIDO AL CARRITO</h1>
+      </ng-template>
 </div>
