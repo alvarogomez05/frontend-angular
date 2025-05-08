@@ -15,5 +15,9 @@ export class ComprasServiceService {
 
   }
 
+  getCompras(){
+    return this.http.get<any>('http://localhost:5002/api/compras');
+  }
+
 
 }

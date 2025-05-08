@@ -90,4 +90,8 @@ export class HeaderComponent {
   logOut(){
     localStorage.clear();
     this.router.navigate(['/login']);   }
+
+    abrir(){
+      document.getElementById('chart')?.classList.remove('d-none')
+    }
 }

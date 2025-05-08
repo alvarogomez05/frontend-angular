@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Productos } from 'src/app/models/productos.model';
 import { ProductosServiceService } from 'src/app/sevices/productosService/productos-service.service';
+import { Chart, registerables } from 'chart.js';
+import { ComprasServiceService } from 'src/app/sevices/comprasService/compras-service.service';
+
 
 @Component({
   selector: 'app-gestion-productos',
@@ -9,10 +12,41 @@ import { ProductosServiceService } from 'src/app/sevices/productosService/produc
 })
 export class GestionProductosComponent {
 
-  constructor(private productService : ProductosServiceService) {}
+  constructor(private productService : ProductosServiceService, private comprasService : ComprasServiceService) {}
 
   protected productos : Productos[]=[];
   selectedFile: File | null = null;  
+  totales: any [] = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+  chart() {
+
+
+
+    Chart.register(...registerables); // Importante para que funcione
+
+    const ctx = document.getElementById('myChart') as HTMLCanvasElement;
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        datasets: [{
+          label: 'Facturación',
+          // En data tengo que poner el total de las compras de cada mes
+          data: [this.totales[0],this.totales[1] , this.totales[2], this.totales[3], this.totales[4], this.totales[5], this.totales[6], this.totales[7], this.totales[8], this.totales[9], this.totales[10], this.totales[11]],
+          backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', 'red', 'yellow', 'cyan']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
 
   ngOnInit() {
     this.productService.getProducts().subscribe(
@@ -35,6 +69,13 @@ export class GestionProductosComponent {
         console.log(error);
       }
     );
+
+    this.comprasService.getCompras().subscribe(response => {
+      console.log(response)
+      this.ordenarPorFecha(response);
+    })
+
+
     
   }
 
@@ -76,5 +117,62 @@ export class GestionProductosComponent {
       this.selectedFile = input.files[0];
     }
   }
+
+   ordenarPorFecha = (carrito : any) => {
+    console.log(carrito)
+    //@ts-ignore
+    carrito.forEach(item => {
+        console.log(item.fecha.substring(5,7));
+
+        switch(item.fecha.substring(5,7)){
+            case '01':
+                this.totales[0] += parseInt(item.total);
+            break;
+            case '02':
+                this.totales[1] += parseInt(item.total);
+            break;
+            case '03':
+                this.totales[2] += parseInt(item.total);
+            break;
+            case '04':
+                this.totales[3] += parseInt(item.total);
+            break;
+            case '05':
+                this.totales[4] += parseInt(item.total);
+            break;
+            case '06':
+                this.totales[5] += parseInt(item.total);
+            break;
+            case '07':
+                this.totales[6] += parseInt(item.total);
+            break;
+            case '08':
+                this.totales[7] += parseInt(item.total);
+            break;
+            case '09':
+                this.totales[8] += parseInt(item.total);
+            break;
+            case '10':
+                this.totales[9] += parseInt(item.total);
+            break;
+            case '11':
+                this.totales[10] += parseInt(item.total);
+            break;
+            case '12':
+                this.totales[11] += parseInt(item.total);
+            break;
+        }
+    })
+
+    console.log('Array con todos los totales guardados:')
+    console.log(this.totales)
+    this.chart();
+}
+
+cerrar(){
+  document.getElementById('chart')?.classList.add('d-none')
+}
+
+
 
 }
