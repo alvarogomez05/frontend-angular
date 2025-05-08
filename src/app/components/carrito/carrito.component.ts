@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Productos } from 'src/app/models/productos.model';
 import { CarritoServiceService } from 'src/app/sevices/carritoService/carrito-service.service';
+import { ComprasServiceService } from 'src/app/sevices/comprasService/compras-service.service';
 import { ProductosServiceService } from 'src/app/sevices/productosService/productos-service.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ProductosServiceService } from 'src/app/sevices/productosService/produc
 })
 export class CarritoComponent {
 
-  constructor(private carritoService: CarritoServiceService,private productService : ProductosServiceService){}
+  constructor(private carritoService: CarritoServiceService,private productService : ProductosServiceService, private comprasService : ComprasServiceService){}
 
   carritoItems= 0;
   productos: Productos []=[];
@@ -23,7 +24,7 @@ export class CarritoComponent {
     //@ts-ignore
     console.log(this.id)
     this.carritoService.getCarritoById(this.id).subscribe(response =>{
-      console.log(response)
+      // console.log(response)
       //Con los id de producto del response para llamar a cada producto por id y mostrarlo
     })
 
@@ -59,20 +60,17 @@ export class CarritoComponent {
           return producto;
         });
 
-        console.log(aux);
+        // console.log(aux);
 
         this.productosFav.push(aux[0]);
         this.productos.push(aux[0])
-        console.log(this.productosFav)
+        // console.log(this.productosFav)
+        this.subtotal += aux[0].precio;
       })
     });
   }
 
-  CalcSubtotal(){
-    this.productos.forEach(p =>{
-      this.subtotal += p.precio;
-    })
-  }
+ 
 
   DeleteCarrito(id_cliente: any,id_producto: any){
     this.carritoService.DeleteCarrito(id_cliente,id_producto).subscribe(response => {
@@ -81,4 +79,48 @@ export class CarritoComponent {
     })
   }
 
+  dynamicClasses(){
+    if(this.carritoItems == 0){
+      return 'grayscale'
+    }  
+    
+    return ''
+  }
+
+  mostrarPasarelaDePago(){
+    console.log("comprar")
+    document.getElementById('pasarela')?.classList.remove('d-none')
+  }
+
+  OcultarModal(){
+    document.getElementById('pasarela')?.classList.add('d-none')
+  }
+
+  Comprar(){
+    // insertar en compras
+    let date = new Date().toISOString().split('T')[0];
+    console.log(date)
+    let id_cliente = this.id;
+
+    this.productos.forEach(producto => {
+      let compra = {
+        fecha: date,
+        total: producto.precio,
+        id_cliente: id_cliente,
+        id_producto: producto.id_producto
+      }
+      console.log(compra)
+
+      this.comprasService.postCompras(compra).subscribe(response => {
+        // console.log(response)
+      })
+
+          // borrar carrito
+
+          this.DeleteCarrito(id_cliente,producto.id_producto)
+
+    })
+
+    // actualizar el stock¿?
+  }
 }

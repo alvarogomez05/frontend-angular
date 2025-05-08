@@ -62,16 +62,11 @@ export class FavoritosComponent {
       
       this.productosFav.push(aux[0]);
       this.productos.push(aux[0])
-      console.log(this.productosFav)
-      this.CalcSubtotal();
+      this.subtotal += aux[0].precio;
+
     })
   }
 
-  CalcSubtotal(){
-    this.productos.forEach(p =>{
-      this.subtotal += p.precio;
-    })
-  }
 
   PostCarrito(id: any,id_producto: any){
     this.CarritoService.PostCarrito(id.user.usuario.id_cliente,id_producto).subscribe(response =>{

@@ -51,12 +51,60 @@
                 </div>
             </div>
             <!-- Aqui va el boton de realizar la compra, no se sabe con que se va  ahacer todavía -->
-             <button class="btn btn__pay">
-                PAYPAL
+             <button class="btn btn__pay" [disabled]="carritoItems == 0"  [ngClass]="dynamicClasses" (click)="mostrarPasarelaDePago()">
+                COMPRAR
              </button>
           </div>
       </main>
       <ng-template #NoCart>
         <h1 class="message">NO TIENES NINGÚN PRODUCTO AÑADIDO AL CARRITO</h1>
       </ng-template>
+
+      <!-- pasarela de pago -->
+      <div class="payment-container shadow pasarela__posicionamiento d-none" id="pasarela">
+        <div class="d-flex justify-content-between">
+            <h5 class="mb-3">Número de tarjeta</h5>
+            <p class="btn" (click)="OcultarModal()">X</p>
+        </div>
+      
+        <div class="credit-card-inputs row g-2 mb-3">
+          <div class="col-12">
+              <input type="text" class="form-control" placeholder="1234 5678 9012 3456" pattern="\d{4} \d{4} \d{4} \d{4}" required
+              ngModel #num="ngModel">
+          </div>
+          <div class="col-6">
+              <input type="text" class="form-control" placeholder="MM/AA" pattern="(0[1-9]|1[0-2])\/\d{2}" required
+              ngModel #date="ngModel">
+          </div>
+          <div class="col-6">
+            <input type="text" class="form-control" placeholder="CVV" pattern="\d{3}" min=3 max=3 required
+              ngModel #cvv="ngModel">
+          </div>
+        </div>
+      
+        <button class="btn btn-pay w-100 mb-3" 
+        (click)="Comprar()"
+        [disabled]="num.invalid || date.invalid || cvv.invalid"
+        [ngClass]="num.invalid || date.invalid || cvv.invalid ? 'grayscale' : ''"
+        >Pagar con tarjeta de crédito {{subtotal + 3.99}} €</button>
+      
+        <div class="divider">o</div>
+      
+        <div class="d-grid gap-2 mb-2">
+          <button class="btn btn-outline-secondary" (click)="Comprar()"><img src="assets/images/pasarela/visa.png" height="20" alt="visa"> <img src="assets/images/pasarela/mastercard-logo.png" height="20" alt="mc"></button>
+          <button class="btn btn-dark" (click)="Comprar()"><img src="assets/images/pasarela/google-pay.png" height="20" alt="google pay"> Google Pay</button>
+        </div>
+      
+        <p class="text-center mt-4 mb-2">¿O prefieres otro método de pago?</p>
+        <div class="d-flex justify-content-around alternative-methods mb-3">
+          <img src="assets/images/pasarela/bizum.jpeg" alt="Bizum" class="btn option-img">
+          <img src="assets/images/pasarela/giropay.png" alt="Giropay" class="btn option-img">
+          <img src="assets/images/pasarela/klarna.png" alt="Klarna" class="btn option-img">
+        </div>
+      
+      
+        <div class="text-center mt-4 footer-box">
+          <small class="text-muted">Secure Checkout <strong>PAYCOMET</strong> por Banco Sabadell</small>
+        </div>
+      </div>
 </div>
