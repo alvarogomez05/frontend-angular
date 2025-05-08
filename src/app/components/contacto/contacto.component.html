@@ -6,10 +6,12 @@
       <mat-form-field appearance="outline" class="col-12" [ngClass]="themeClass">
         <mat-label>Nombre</mat-label>
         <input
+        readonly
           matInput
           name="name"
           placeholder="Nombre"
           required
+          [(ngModel)]="user.nombre"
           ngModel
           #nombreModel="ngModel"
         />
@@ -20,11 +22,13 @@
       <mat-form-field appearance="outline" class="col-12" [ngClass]="themeClass">
         <mat-label>Correo</mat-label>
         <input
+        readonly
           matInput
           name="mail"
           placeholder="Correo"
           required
           type="email"
+          [(ngModel)]="user.email"
           ngModel
           #mailModel="ngModel"
           pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"

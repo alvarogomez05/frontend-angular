@@ -3,12 +3,17 @@ import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 import {NgModel} from "@angular/forms";
 
 
+
 @Component({
   selector: 'app-contacto',
   templateUrl: './contacto.component.html',
   styleUrls: ['./contacto.component.scss']
 })
 export class ContactoComponent {
+
+  //@ts-ignore
+  user = JSON.parse(localStorage.getItem('usuario')).user.usuario
+
 
   @ViewChild('nombreModel') nombreModel: NgModel | undefined;
   @ViewChild('mailModel') mailModel: NgModel | undefined;
