@@ -5,3 +5,41 @@ display: flex;
 justify-content: center;
 align-items: center;
 }
+
+
+.btn__filtrar{
+  border: 1px solid #55C0FD;
+  color: #55C0FD;
+  font-weight: bold;
+  height: 40px;
+}
+
+.aside__form{
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left:-1500px;
+  z-index: 100011;
+}
+
+/* Añadir la clase mostrar para que se muestre y quitarla para que desaparezca el formulario */
+
+.mostrar{
+  animation: mostrar .5s ease forwards;
+}
+
+@keyframes mostrar {
+  from{
+      left: -500px;
+  }
+  to{
+      left: 0px;
+  }
+}
+
+@media (min-width: 992px) {
+  .aside__form{
+    width: 25%;
+  }
+}

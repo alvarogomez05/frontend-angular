@@ -26,7 +26,7 @@
     <p class="btn" (click)="removeModal()">X</p>
   </div>
   <form
-    (ngSubmit)="newProduct(nombreModel.value,descripcionModel.value,precioModel.value,stockModel.value,descripcionModel.value)">
+    (ngSubmit)="newProduct(nombreModel.value,descripcionModel.value,precioModel.value,stockModel.value,categoriaModel.value)">
     <input type="file" (change)="onFileSelected($event)" accept="image/*" />
     <mat-form-field appearance="outline" class="col-12">
       <mat-label>Nombre</mat-label>

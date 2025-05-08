@@ -2,7 +2,39 @@
   <mat-spinner></mat-spinner>
 </div>
 
+<p class="btn btn__filtrar mx-5" (click)="showFilter()">FILTRAR</p>
 
 <div *ngIf="loading === false" class="d-flex gap-1 gap-sm-3 gap-md-5 flex-wrap flex-row w-100 justify-content-center p-5">
   <app-productos-card *ngFor="let producto of productos" [producto]="producto"  class="shadow rounded my-2"></app-productos-card>
 </div>
+
+
+<section class="container  border aside__form bg-white shadow " id="form-filter">
+  <div class="d-flex justify-content-between">
+    <h1 class="my-4">Filtra los productos</h1>
+    <h2 class="btn" (click)="closeModal()">X</h2>
+  </div>
+  <form  class="row g-3" (submit)="submit(minPrice.value,maxPrice.value,category.value)">
+      <div class="col-md-6">
+          <label for="minPrice" class="form-label">Precio Mínimo</label>
+          <input type="number" id="minPrice" name="minPrice" class="form-control" min="0" ngModel #minPrice = "ngModel">
+      </div>
+      <div class="col-md-6">
+          <label for="maxPrice" class="form-label">Precio Máximo</label>
+          <input type="number" id="maxPrice" name="maxPrice" class="form-control" min="0" ngModel #maxPrice = "ngModel">
+      </div>
+      <div class="col-md-12">
+          <label for="category" class="form-label">Categoría</label>
+          <select name="category" id="category" class="form-select" ngModel #category = "ngModel">
+              <option value=""></option>
+              <option value="Zapatillas">Zapatillas</option>
+              <option value="Ropa">Ropa</option>
+              <option value="Accesorios">Accesorios</option>
+          </select>
+      </div>
+      <div class="col-12 d-flex gap-3">
+          <button class="btn btn__filtrar">Filtrar</button>
+          <p class="btn btn__filtrar" (click)="borrarFiltro()">Borrar filtro</p>
+      </div>
+  </form>
+</section>
