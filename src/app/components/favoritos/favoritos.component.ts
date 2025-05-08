@@ -17,6 +17,7 @@ export class FavoritosComponent {
   favoritos: Favorito[] = []; // al principio de tu componente
   productos: Productos[]=[];
   subtotal: number = 0;
+  productosFav: any[]=[];
   //@ts-ignore
   id: string = JSON.parse(localStorage.getItem('usuario'));
 
@@ -43,8 +44,25 @@ export class FavoritosComponent {
   getProductsFav(id: any){
     console.log(id)
     this.productService.getProductoById(id).subscribe(result => {
-      console.log(result)
-      this.productos.push(result[0]);
+      // console.log(result)
+
+      let aux =  result.map((producto : any) => {
+        //@ts-ignore
+        if (producto.imagen && producto.imagen.data) {
+        //@ts-ignore
+          const byteArray = new Uint8Array(producto.imagen.data);
+          const blob = new Blob([byteArray], { type: 'image/png' }); // Ajusta el tipo si no es PNG
+          const imageUrl = URL.createObjectURL(blob);
+          return { ...producto, imageUrl };
+        }
+        return producto;
+      });
+
+      // console.log(aux);
+      
+      this.productosFav.push(aux[0]);
+      this.productos.push(aux[0])
+      console.log(this.productosFav)
       this.CalcSubtotal();
     })
   }

@@ -17,9 +17,9 @@
  <div class="favorito__productos" >
             <!-- Se muestran a traves de un for con la info -->
              <!-- ejemplo de 1 producto en el favorito -->
-              <div class="favorito__producto" *ngFor="let producto of productos">
+              <div class="favorito__producto" *ngFor="let producto of productosFav">
                 <!-- clase img-fluid o algo asi de bootstrap -->
-                <img src="{{producto.imagen}}" alt="" class="favorito__producto__imagen img-fluid">
+                <img [src]="producto.imageUrl" alt="" class="favorito__producto__imagen img-fluid">
                 <!-- el texto del producot -->
                 <div class="box">
                     <div class="favorito__producto__text">

@@ -16,10 +16,11 @@ export class ContactoComponent {
   @ViewChild('msjModel') msjModel: NgModel | undefined;
 
   // @ts-ignore
-  get themeClass() : String | String[]{
-    // @ts-ignore
-    return document.querySelector("body").getAttribute('data-bs-theme') === 'light' ? 'light-theme': 'light-theme';
+  get themeClass(): string {
+    const theme = document.querySelector("body")?.getAttribute('data-bs-theme');
+    return theme === 'dark' ? 'dark-theme' : 'light-theme';
   }
+  
 
   ngOnInit() {
     emailjs.init('0wgPu1C_SkTQ0gYSb');
@@ -51,4 +52,12 @@ export class ContactoComponent {
       }
     );
   }
+
+  get dynamicClasses() {
+    return {
+      [this.themeClass]: true,
+      'grayscale': this.nombreModel?.invalid || this.mailModel?.invalid || this.msjModel?.invalid || this.asuntoModel?.invalid
+    };
+  }
+  
 }

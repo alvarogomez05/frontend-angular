@@ -3,13 +3,63 @@
   pointer-events: none;  /* Para evitar interacciones cuando está deshabilitado */
 }
 
+.light-theme {
+  background-color: #fff;
+  color: #000;
+}
+
 .dark-theme {
-  background-color: white;
+  background-color: #464545;
+  color: #fff;
+}
+
+.dark-theme input,
+.dark-theme textarea,
+.dark-theme .mat-form-field-infix {
+  background-color:  #464545 !important;
+  color: #fff !important;
+}
+
+
+
+.dark-theme .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #ffffff;
+  border-color: #ffffff !important;
+}
+
+.dark-theme .mat-form-field-appearance-outline .mat-form-field-outline-start,
+.dark-theme .mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-color: #ffffff !important;
+}
+
+.dark-theme .mat-form-field-label,
+.dark-theme .mat-input-element {
+  color: #fff !important;
+}
+
+.dark-theme .mat-raised-button {
+  background-color: #4a90e2 !important;
+  color: white !important;
+}
+
+.dark-theme .mat-form-field-label {
+  color: #fff;
+}
+
+.dark-theme {
+  mat-label {
+    color: #bbb !important;
+    font-weight: 500;
+  }
 }
 
 .light-theme {
-  color: #dee2e6;
+  mat-label {
+    color: #333 !important;
+    font-weight: 500;
+  }
 }
+
 
 
 //

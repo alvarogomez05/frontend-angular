@@ -15,6 +15,7 @@ export class CarritoComponent {
   carritoItems= 0;
   productos: Productos []=[];
   subtotal =0;
+  productosFav: any []=[];
   //@ts-ignore
   id = JSON.parse(localStorage.getItem('usuario')).user.usuario.id_cliente;
 
@@ -44,9 +45,25 @@ export class CarritoComponent {
     array.forEach((element) => {
     //@ts-ignore
       this.productService.getProductoById(element.id_producto).subscribe(result => {
-        console.log(result)
-        this.productos.push(result[0]);
-        this.CalcSubtotal();
+        // console.log(result)
+
+        let aux = result.map((producto: any) => {
+          //@ts-ignore
+          if (producto.imagen && producto.imagen.data) {
+            //@ts-ignore
+            const byteArray = new Uint8Array(producto.imagen.data);
+            const blob = new Blob([byteArray], { type: 'image/png' }); // Ajusta el tipo si no es PNG
+            const imageUrl = URL.createObjectURL(blob);
+            return { ...producto, imageUrl };
+          }
+          return producto;
+        });
+
+        console.log(aux);
+
+        this.productosFav.push(aux[0]);
+        this.productos.push(aux[0])
+        console.log(this.productosFav)
       })
     });
   }
