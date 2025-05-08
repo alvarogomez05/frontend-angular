@@ -20,5 +20,32 @@ export class ClientesServiceService {
     return this.http.post('http://localhost:5002/api/clientes', datos);
   }
 
+  updateToken(token:any){
+    //@ts-ignore
+    let user = JSON.parse(localStorage.getItem('usuario')).user.usuario
+    console.log(user)
+
+    return this.http.put('http://localhost:5002/api/clientes/token/'+user.id_cliente, {
+      token: token
+    })
+  }
+
+  compareToken(token:any){
+    //@ts-ignore
+    let user = JSON.parse(localStorage.getItem('usuario')).user.usuario
+
+  
+    return this.http.post('http://localhost:5002/api/clientes/token/'+user.id_cliente, {token:token});
+
+  }
+
+  updatePassword(pwd:any){
+    //@ts-ignore
+    let user = JSON.parse(localStorage.getItem('usuario')).user.usuario
+
+    return this.http.put('http://localhost:5002/api/clientes/'+user.id_cliente, {
+      password: pwd
+    })
+  }
 
 }

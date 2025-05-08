@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClientesServiceService } from 'src/app/sevices/clientesService/clientes-service.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent {
+
+  constructor(private clientesService: ClientesServiceService){}
 
   cancel() {
     // @ts-ignore
@@ -17,9 +20,13 @@ export class ResetPasswordComponent {
 
     if(pwd == pwd2) {
       console.log('password changed');
+
+      this.clientesService.updatePassword(pwd).subscribe(response => {
+        console.log(response)
+      })
+
       // @ts-ignore
       document.getElementById('resetPassword').classList.add('d-none');
-      //Hacer el update a la bd
     }else{
       console.log('ERROR: Las contraseñas no coinciden');
     }
