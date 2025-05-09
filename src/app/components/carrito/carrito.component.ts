@@ -11,19 +11,20 @@ import { ProductosServiceService } from 'src/app/sevices/productosService/produc
 })
 export class CarritoComponent {
 
-  constructor(private carritoService: CarritoServiceService,private productService : ProductosServiceService, private comprasService : ComprasServiceService){}
+  constructor(private carritoService: CarritoServiceService, private productService: ProductosServiceService, private comprasService: ComprasServiceService) { }
 
-  carritoItems= 0;
-  productos: Productos []=[];
-  subtotal =0;
-  productosFav: any []=[];
+  carritoItems = 0;
+  productos: Productos[] = [];
+  subtotal = 0;
+  productosFav: any[] = [];
+  carrito: any[] = [];
   //@ts-ignore
   id = JSON.parse(localStorage.getItem('usuario')).user.usuario.id_cliente;
 
-  ngOnInit(){
+  ngOnInit() {
     //@ts-ignore
     console.log(this.id)
-    this.carritoService.getCarritoById(this.id).subscribe(response =>{
+    this.carritoService.getCarritoById(this.id).subscribe(response => {
       // console.log(response)
       //Con los id de producto del response para llamar a cada producto por id y mostrarlo
     })
@@ -31,20 +32,21 @@ export class CarritoComponent {
     this.UpdateBadge();
   }
 
-  UpdateBadge(){
+  UpdateBadge() {
     //@ts-ignore
-     console.log(this.id)
-     this.carritoService.getCarritoById(this.id).subscribe(response =>{
+    console.log(this.id)
+    this.carritoService.getCarritoById(this.id).subscribe(response => {
       console.log(response)
       this.GetCarrito(response);
+      this.carrito = response;
       this.carritoItems = response.length;
-     })
+    })
   }
 
-  GetCarrito(array: any){
+  GetCarrito(array: any) {
     //@ts-ignore
     array.forEach((element) => {
-    //@ts-ignore
+      //@ts-ignore
       this.productService.getProductoById(element.id_producto).subscribe(result => {
         // console.log(result)
 
@@ -62,50 +64,61 @@ export class CarritoComponent {
 
         // console.log(aux);
 
-        this.productosFav.push(aux[0]);
+        let aux2 = aux.map((producto: any) => {
+          const carro = this.carrito.find(c => c.id_producto === producto.id_producto);
+          if (carro) {
+            return { ...producto, cantidad: carro.cantidad };
+          }
+          return producto;
+        });
+
+        // console.log(aux2)
+
+
+        this.productosFav.push(aux2[0]);
         this.productos.push(aux[0])
         // console.log(this.productosFav)
-        this.subtotal += aux[0].precio;
+        this.subtotal += aux2[0].precio * aux2[0].cantidad;
       })
     });
   }
 
- 
 
-  DeleteCarrito(id_cliente: any,id_producto: any){
-    this.carritoService.DeleteCarrito(id_cliente,id_producto).subscribe(response => {
+
+  DeleteCarrito(id_cliente: any, id_producto: any) {
+    this.carritoService.DeleteCarrito(id_cliente, id_producto).subscribe(response => {
       // console.log(response)
       window.location.reload();
     })
   }
 
-  dynamicClasses(){
-    if(this.carritoItems == 0){
+  dynamicClasses() {
+    if (this.carritoItems == 0) {
       return 'grayscale'
-    }  
-    
+    }
+
     return ''
   }
 
-  mostrarPasarelaDePago(){
+  mostrarPasarelaDePago() {
     console.log("comprar")
     document.getElementById('pasarela')?.classList.remove('d-none')
   }
 
-  OcultarModal(){
+  OcultarModal() {
     document.getElementById('pasarela')?.classList.add('d-none')
   }
 
-  Comprar(){
+  Comprar() {
     // insertar en compras
     let date = new Date().toISOString().split('T')[0];
     console.log(date)
     let id_cliente = this.id;
 
-    this.productos.forEach(producto => {
+    this.productosFav.forEach(producto => {
       let compra = {
         fecha: date,
-        total: producto.precio,
+        total: producto.precio * producto.cantidad,
         id_cliente: id_cliente,
         id_producto: producto.id_producto
       }
@@ -115,9 +128,9 @@ export class CarritoComponent {
         // console.log(response)
       })
 
-          // borrar carrito
+      // borrar carrito
 
-          this.DeleteCarrito(id_cliente,producto.id_producto)
+      this.DeleteCarrito(id_cliente, producto.id_producto)
 
     })
 

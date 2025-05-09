@@ -175,3 +175,21 @@
 .option-img{
     height: 60px;
 }
+
+
+.left {
+  flex-grow: 1;
+}
+
+.right {
+  text-align: right;
+  min-width: 100px; /* Puedes ajustar esto para mantener la alineación */
+}
+
+.carrito__producto__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin: 1rem;
+  font-weight: bold;
+}
